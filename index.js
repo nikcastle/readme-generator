@@ -40,7 +40,7 @@ function promptUser() {
             {
                 type: "input",
                 name: "contrib",
-                message: "Please describe how a user would contribute to this project."
+                message: "Please list any guidelines a user would need to know in order to contribute to this project."
             },
             {
                 type: "input",
@@ -49,9 +49,14 @@ function promptUser() {
             },
             {
                 type: "input",
-                name: "questions",
-                message: "Please list questions regarding this project, if any."
+                name: "username",
+                message: "What is your github username?"
             },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your email address?"
+            }
 
         ]);
 }
@@ -90,10 +95,13 @@ function generateReadMe(answers) {
     ## Tests
     ${answers.tests}
 
-    ## Questions
-    ${answers.questions}
+    ## Questions?
+    Please email with with any questions [@${answers.email}](#${answers.email}) or find me on Github [@${answers.username}](#${answers.username}).
     `
 }
+
+//* how can I make the email address and the github username links?
+//* how do I put a badge for the relevant license?
 
 promptUser()
     .then(function (answers) {
@@ -102,7 +110,7 @@ promptUser()
         return writeFileAsync("genREADME.md", readme);
     })
     .then(function () {
-        console.log("Successfully wrote to genREADME.md"); //* can the file be called README.md when I already have one in the repo? How do I test it?
+        console.log("Successfully wrote to genREADME.md"); 
 
     })
     .catch(function (err) {
