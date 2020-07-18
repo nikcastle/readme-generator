@@ -63,7 +63,7 @@ function promptUser() {
 
 function generateReadMe(answers) {
     return `
-    # ${answers.title}
+    # ${answers.title}  ${badge}
 
     ## Description
     ${answers.description}
@@ -98,10 +98,35 @@ function generateReadMe(answers) {
     ## Questions?
     Please email with with any questions [@${answers.email}](#${answers.email}) or find me on Github [@${answers.username}](#${answers.username}).
     `
+    generateBadge(license); // where does this need to be called?
 }
+
+function generateBadge(license) {
+    switch(license) {
+        case "MIT License":
+            let img = <img src=""></img>;
+        break;
+        case "GNU General Public License v2":
+            let img = <img src=""></img>;
+        break;
+        case "GNU General Public License v3":
+            let img = <img src=""></img>;
+        break;
+        case "Apache License 2.0":
+            let img = <img src=""></img>;
+        break;
+        case "ISC License":
+            let img = <img src=""></img>;
+        break;
+        default:
+            let img = "";
+    }
+}
+
 
 //* how can I make the email address and the github username links?
 //* how do I put a badge for the relevant license?
+//* does the text of the license need to be in the readme or is naming it enough?
 
 promptUser()
     .then(function (answers) {
