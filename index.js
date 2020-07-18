@@ -16,27 +16,26 @@ function promptUser() {
                 name: "description",
                 message: "Please write a brief description of the project."
             },
-            // {
-            //     type: "checkbox",
-            //     name: "tableOfContents",
-            //     message: "Please check which items you would like contained in the Table of Contents.",
-            //     choices: ["Title", "Description", "Installation", "Usage", "License", "Contributing", "Author(s)", "Credit" ]
-            // },
             {
                 type: "input",
-                name: "instal",
-                message: "Please describe what the user would need to know to install this project"
+                name: "install",
+                message: "Please provide step-by-step instructions the user would need to take to install this project."
             },
             {
                 type: "input",
                 name: "use",
-                message: "Please describe how to use this project. "
+                message: "Please provide instructions and/or examples for how to use this project. "
+            },
+            {
+                type: "input",
+                name: "credit",
+                message: "Please list your collaborators, if any."
             },
             {
                 type: "list",
                 name: "license",
-                message: "Please select a license for this project.",
-                choices: ["", "", "", "", ""]
+                message: "Please select an open source license for this project. (Use the arrow keys to move between options and the space bar to select one.)",
+                choices: ["MIT License", "GNU General Public License v2", "GNU General Public License v3", "Apache License 2.0", "ISC License"]
             },
             {
                 type: "input",
@@ -57,32 +56,42 @@ function promptUser() {
         ]);
 }
 
-function generateReadMe() {
+function generateReadMe(answers) {
     return `
-    //* can the code in here look just like an html would look but with markdown language instead of html tags?
-    # Project Title
+    # ${answers.title}
 
     ## Description
+    ${answers.description}
 
     ## Table of Contents
-    1. Installation
-    2. Usage
-    3. Credits
-    4. License
-    5. Contributing
-    6. Tests
+    1. [Installation](#installation)
+    2. [Usage](#usage)
+    3. [Credits](#credits)
+    4. [License](#license)
+    5. [Contributing](#contributing)
+    6. [Tests](#tests)
+    7. [Questions](#questions)
 
     ## Installation
+    ${answers.install}
 
     ## Usage
+    ${answers.use}
 
     ## Credits
+    ${answers.credit}
 
     ## License
+    ${answers.license}
 
     ## Contributing
+    ${answers.contrib}
 
     ## Tests
+    ${answers.tests}
+
+    ## Questions
+    ${answers.questions}
     `
 }
 
@@ -93,7 +102,7 @@ promptUser()
         return writeFileAsync("genREADME.md", readme);
     })
     .then(function () {
-        console.log("Successfully wrote to README.md"); //* can the file be called README.md when I already have one in the repo? How do I test it?
+        console.log("Successfully wrote to genREADME.md"); //* can the file be called README.md when I already have one in the repo? How do I test it?
 
     })
     .catch(function (err) {
