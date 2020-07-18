@@ -6,8 +6,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 function promptUser() {
     return inquirer
-        .prompt([
-            {
+        .prompt([{
                 type: "input",
                 name: "title",
                 message: "What is the title of your project?"
@@ -34,9 +33,10 @@ function promptUser() {
                 message: "Please describe how to use this project. "
             },
             {
-                type: "input",
+                type: "list",
                 name: "license",
-                message: "Please list any license used in this project."
+                message: "Please select a license for this project.",
+                choices: ["", "", "", "", ""]
             },
             {
                 type: "input",
@@ -59,19 +59,43 @@ function promptUser() {
 
 function generateReadMe() {
     return `
+    //* can the code in here look just like an html would look but with markdown language instead of html tags?
+    # Project Title
+
+    ## Description
+
+    ## Table of Contents
+    1. Installation
+    2. Usage
+    3. Credits
+    4. License
+    5. Contributing
+    6. Tests
+
+    ## Installation
+
+    ## Usage
+
+    ## Credits
+
+    ## License
+
+    ## Contributing
+
+    ## Tests
     `
 }
 
-promptUser ()
-    .then(function(answers){
+promptUser()
+    .then(function (answers) {
         const readme = generateReadMe(answers);
 
-        return writeFileAsync("README.md", readme);
+        return writeFileAsync("genREADME.md", readme);
     })
-    .then(function() {
-        console.log("Successfully wrote to README.md");
-        
+    .then(function () {
+        console.log("Successfully wrote to README.md"); //* can the file be called README.md when I already have one in the repo? How do I test it?
+
     })
-    .catch(function(err) {
+    .catch(function (err) {
         throw err;
     })
