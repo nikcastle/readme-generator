@@ -63,73 +63,47 @@ function promptUser() {
 
 function generateReadMe(answers) {
     return `
-    # ${answers.title}  ${badge}
+# ${answers.title}  <img src="https://img.shields.io/badge/License-${answers.license}-yellow"></img>
 
-    ## Description
-    ${answers.description}
+## Description
+${answers.description}
 
-    ## Table of Contents
-    1. [Installation](#installation)
-    2. [Usage](#usage)
-    3. [Credits](#credits)
-    4. [License](#license)
-    5. [Contributing](#contributing)
-    6. [Tests](#tests)
-    7. [Questions](#questions)
+## Table of Contents
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Credits](#credits)
+4. [License](#license)
+5. [Contributing](#contributing)
+6. [Tests](#tests)
+7. [Questions](#questions)
 
-    ## Installation
-    ${answers.install}
+## Installation
+${answers.install}
 
-    ## Usage
-    ${answers.use}
+## Usage
+${answers.use}
 
-    ## Credits
-    ${answers.credit}
+## Credits
+${answers.credit}
 
-    ## License
-    ${answers.license}
+## License
+${answers.license}
 
-    ## Contributing
-    ${answers.contrib}
+## Contributing
+${answers.contrib}
 
-    ## Tests
-    ${answers.tests}
+## Tests
+${answers.tests}
 
-    ## Questions?
-    Please email with with any questions [@${answers.email}](#${answers.email}) or find me on Github [@${answers.username}](#${answers.username}).
-    `
-    generateBadge(license); // where does this need to be called?
-}
-
-function generateBadge(license) {
-    switch(license) {
-        case "MIT License":
-            let img = <img src=""></img>;
-        break;
-        case "GNU General Public License v2":
-            let img = <img src=""></img>;
-        break;
-        case "GNU General Public License v3":
-            let img = <img src=""></img>;
-        break;
-        case "Apache License 2.0":
-            let img = <img src=""></img>;
-        break;
-        case "ISC License":
-            let img = <img src=""></img>;
-        break;
-        default:
-            let img = "";
-    }
+## Questions?
+Please email with with any questions [@${answers.email}](mailto:${answers.email}) or find me on Github [${answers.username}](https://github.com/${answers.username}).
+`
 }
 
 
-//* how can I make the email address and the github username links?
-//* how do I put a badge for the relevant license?
-//* does the text of the license need to be in the readme or is naming it enough?
 
 promptUser()
-    .then(function (answers) {
+.then(function (answers) {
         const readme = generateReadMe(answers);
 
         return writeFileAsync("genREADME.md", readme);
