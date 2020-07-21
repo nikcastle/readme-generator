@@ -96,7 +96,7 @@ ${answers.contrib}
 ${answers.tests}
 
 ## Questions?
-Please email with with any questions [@${answers.email}](mailto:${answers.email}) or find me on Github [${answers.username}](https://github.com/${answers.username}).
+Please email any questions to [${answers.email}](mailto:${answers.email}) or find me on Github [${answers.username}](https://github.com/${answers.username}).
 `
 }
 
